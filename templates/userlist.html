@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1">
+    {% for user in userlist %}
+    <tr>
+        <td>{{loop.index}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.password}}</td>
+        <td>{{user.birthday}}</td>
+        <td><img src="/static/image/{{user.image}}" width="80" height="80"/>{{user.image}}</td>
+        <td>{{user.description}}</td>
+        <td>{{user.sexs}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">穷开心</a>
+        <ul class="nav">
+            <li class="active"><a href="/">首页</a></li>
+            <li><a href="#">最新</a></li>
+            <li><a href="#">热门</a></li>
+            <li>
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block articlelist %}
+<h4>{{article.title}}</h4>
+<div>
+    <div class="well well-small">{{article.article|safe}}</div>
+    <div>
+        {% for comm in comments %}
+        <fieldset>
+            <legend style="font-size:14px;">{{comm.username}} 评论于:{{comm.commentdate}}</legend>
+            {{comm.content}}
+        </fieldset>
+        {% endfor %}
+    </div>
+
+     <div style="width:240px;font-size:12px;text-align:center">
+        <fieldset>
+            <legend>评论</legend>
+            <form action="/comment" method="POST" name='login' class="form-signin">
+                呢称：<input name="username" type="text" style="width:180px"/><input name="newsid" value="1" type="hidden"/>
+                内容：<textarea name="content" style="width:180px;height:80px"></textarea>
+                <input name="artid" value="{{article.id}}" type="hidden"/>
+                <input name="submit" value="我要评论" type="submit"/>
+            </form>
+        </fieldset>
+    </div>
+</div>
+{% endblock %}
+

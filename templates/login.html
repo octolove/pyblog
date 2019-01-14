@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">穷开心</a>
+        <ul class="nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#">最新</a></li>
+            <li><a href="#">热门</a></li>
+            <li>
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block articlelist %}
+{% if session['username'] %}
+<div>
+    <div class="well well-small">您好[{{session['username']}}],您已经登录过了，无须重复登录。</div>
+</div>
+{% else %}
+<div class="container">
+    <form class="form-horizontal" action="/login" method="POST" name='login'>
+        <h4>{{message}}</h4>
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">username</label>
+
+            <div class="controls">
+                <input type="text" id="inputEmail" name='username' placeholder="username">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">password</label>
+
+            <div class="controls">
+                <input type="password" id="inputPassword" name='password' placeholder="password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox"> Remember me
+                </label>
+                <button type="submit" class="btn">Sign in</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock %}

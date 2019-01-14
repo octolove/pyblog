@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/reg" method="POST" name='reg' enctype='multipart/form-data'>
+     <p>username:<input type="text" name="username"></p>
+     <p>password:<input type="password" name="password"></p>
+     <p>birthday:<input type="text" name="birthday"></p>
+     <p>image:<input type="file" name="image"></p>
+     <p>description:<textarea name="description" cols="5" rows="2"></textarea></p>
+     <p>m:<input type="radio" name="sexs" value="m"/> F:<input type="radio" name="sexs" value="f"/></p>
+
+    <p><input type="submit" value="reg"></p>
+</form>
+{% endblock %}

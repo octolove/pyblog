@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">穷开心</a>
+        <ul class="nav">
+            <li class="active"><a href="#">首页</a></li>
+            <li><a href="#">最新</a></li>
+            <li><a href="#">热门</a></li>
+            <li>
+                <form class="navbar-search pull-left">
+                    <input type="text" class="search-query" placeholder="Search">
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </li>
+            {% if session['username'] %}
+            <li><a href="#">欢迎你:{{session['username']}}</a></li>
+            <li><a href="/logout">退出</a></li>
+            {% else %}
+            <li><a href="/login">登录</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block articlelist %}
+{% for art in articlelist %}
+<div class="well well-small">
+    <div class="media">
+        <a class="pull-left" href="#">
+            <img class="media-object" src='/static/upload_image/touxiang.jpg' width="30" height="30">
+        </a>
+
+        <div class="media-body">
+            <h4 class="media-heading"><a href="/view/{{art.id}}">{{art.title}}</a></h4>
+            {% set aaaa= art.article|length %}
+            {% if aaaa<=1000 %}
+            {{art.article|safe}}
+            {% else %}
+            {{art.article|safe|trim|truncate(length = 1000)}}
+            {% endif %}
+        </div>
+        <div class="media-body"><a href="#">{{art.author}}</a> 发布于 {{art.creatime}}
+            <span class="label">评论({{art.goods}})</span>
+            <span class="label">阅读({{art.bads}})</span>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+{% block treelist %}
+<div class="well well-small">
+    <h4>搞笑专家排行</h4>
+    <ul>
+        {% for user in userlist%}
+        <li>{{user.username}} <span class="label">(1)</span></li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="well well-small">
+    {{session['username']}}
+    <a href="/article" title="发帖">发帖</a>
+    <img class="media-object" src='/static/upload_image/touxiang.jpg' width="200" height="200">
+</div>
+{% endblock %}
+
+
